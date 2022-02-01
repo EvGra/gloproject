@@ -41,6 +41,7 @@ let getAllServicePrices = function() {
 allServicePrices = getAllServicePrices()
 
 function getFullPrice() {
+  
   return screenPrice + allServicePrices;
 
 }
@@ -48,6 +49,7 @@ function getFullPrice() {
 fullPrice = getFullPrice()
 
 let getTitle = function(){
+  
   title = title.trim();
 
  return title[0].toUpperCase() + title.slice(1).toLowerCase();
