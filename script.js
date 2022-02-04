@@ -1,114 +1,120 @@
 'use strict';
 
-let title;
-let screens;
-let screenPrice;
-let rollback = Math.ceil(Math.random() * 100);
-let adaptive;
-let service1;
-let service2;
-let allServicePrices;
-let fullPrice;
-let servicePercentPrice;
-
 const isNumber = function(num){
-  return !isNaN(parseFloat(num)) && isFinite(num)
+
+  return !isNaN(parseFloat(num)) && isFinite(num) && num !== null;
 }
 
-isNumber()
+const appData = {
+   title: '',
+   screens: '',
+   screenPrice: 0,
+   rollback: Math.ceil(Math.random() * 100),
+   adaptive: true,
+   service1: '',
+   service2: '',
+   allServicePrices: 0,
+   fullPrice: 0,
+   servicePercentPrice: 0,
 
-const asking = function(){
-  title = prompt("Как называется ваш проект?", "Glo");
-  screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
+   asking: function(){
+    appData.title = prompt("Как называется ваш проект?", "Glo");
+    appData.screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
 
-   do {
-     screenPrice = prompt("Сколько будет стоить данная работа?");
-   } while (!isNumber(screenPrice))
+    do {
 
-   screenPrice = parseFloat(screenPrice);
+      appData.screenPrice = parseFloat(prompt("Сколько будет стоить данная работа?"));
 
-  adaptive = confirm("Нужен ли адаптив на сайте?");
-}
+    } while (!isNumber(appData.screenPrice))
 
-asking()
+    appData.adaptive = confirm("Нужен ли адаптив на сайте?");
+  },
 
-const showTypeOf = function(variable) {
-  console.log(variable, typeof variable);
-}
+  getRollbackMessage: function(price) {
+    if (price > 30000) {
+      return "Даем скидку в 10%";
+    } else if (price > 15000 && price <= 30000) {
+      return "Даем скидку в 5%";
+    } else if (price >= 0 && price <= 15000) {
+      return "Скидка не предусмотрена";
+    } else {
+      return "Что то пошло не так";
+    }
+  },
 
-showTypeOf(title);
-showTypeOf(screenPrice);
-showTypeOf(adaptive);
-
-const getRollbackMessage = function(price) {
-  if (price > 30000) {
-    return "Даем скидку в 10%";
-  } else if (price > 15000 && price <= 30000) {
-    return "Даем скидку в 5%";
-  } else if (price >= 0 && price <= 15000) {
-    return "Скидка не предусмотрена";
-  } else {
-    return "Что то пошло не так";
-  }
-}
-
-const getAllServicePrices = function() {
+  getAllServicePrices: function() {
 
   let sum = 0;
 
   for (let i = 0; i < 2; i++) {
     if (i === 0) {
-      service1 = prompt("Какой дополнительный тип услуги нужен?");
+      appData.service1 = prompt("Какой дополнительный тип услуги нужен?");
     } else if (i === 1){
-      service2 = prompt("Какой дополнительный тип услуги нужен?");
+      appData.service2 = prompt("Какой дополнительный тип услуги нужен?");
     }
 
    do {
-    allServicePrices = prompt("Сколько будет стоить?");
-  } while (!isNumber(allServicePrices))
+    appData.allServicePrices = prompt("Сколько будет стоить?");
+  } while (!isNumber(appData.allServicePrices))
 
-  allServicePrices = parseFloat(allServicePrices);
+    appData.allServicePrices = parseFloat(appData.allServicePrices);
 
-    sum += allServicePrices;
-   }
-  return sum;
-}
+      sum += appData.allServicePrices;
+    }
+    return sum;
+  },
 
-function getFullPrice() {
+  getFullPrice: function() {
   
-  return screenPrice + allServicePrices;
+  return appData.screenPrice + appData.allServicePrices;
 
-}
+  },
 
-const getTitle = function(){
+  getTitle: function(){
   
-  title = title.trim();
+  appData.title = appData.title.trim();
 
- return title[0].toUpperCase() + title.slice(1).toLowerCase();
+ return appData.title[0].toUpperCase() + appData.title.slice(1).toLowerCase();
+  },
+
+ getServicePercentPrices: function() {
+
+  return Math.ceil(appData.fullPrice - appData.fullPrice * (appData.rollback / 100));
+  },
+
+  logger: function (){
+    for(let key in appData){
+      console.log(key)
+    }
+  },
+
+  start: function(){
+    appData.asking(),
+    appData.getAllServicePrices(),
+    appData.getFullPrice(),
+    appData.getTitle(),
+    appData.getServicePercentPrices(),
+    appData.logger()
+  }
+
 }
 
-const getServicePercentPrices = function() {
 
-  return Math.ceil(fullPrice - fullPrice * (rollback / 100));
-}
-
-allServicePrices = getAllServicePrices()
-fullPrice = getFullPrice()
-getTitle()
-servicePercentPrice = getServicePercentPrices()
+appData.start()
 
 
-console.log(screens.split(", "));
-console.log(getRollbackMessage(fullPrice));
-console.log(getServicePercentPrices());
-console.log(typeof(title),
- typeof(screens),
- typeof(screenPrice),
- typeof(rollback),
- typeof(adaptive),
- typeof(service1),
- typeof(service2),
- typeof(allServicePrices),
- typeof(fullPrice),
- typeof(servicePercentPrice)
-);
+
+// console.log(screens.split(", "));
+// console.log(getRollbackMessage(appData.fullPrice));
+// console.log(getServicePercentPrices());
+// console.log(typeof(title),
+//  typeof(screens),
+//  typeof(screenPrice),
+//  typeof(rollback),
+//  typeof(adaptive),
+//  typeof(service1),
+//  typeof(service2),
+//  typeof(allServicePrices),
+//  typeof(fullPrice),
+//  typeof(servicePercentPrice)
+// );
