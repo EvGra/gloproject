@@ -1,5 +1,21 @@
 'use strict';
 
+
+const title = document.getElementsByTagName('h1');
+const button = document.getElementsByClassName('handler_btn');
+const plus = document.querySelector('.screen-btn');
+const percent = document.querySelectorAll('.percent');
+const number = document.querySelectorAll('.number');
+const input = document.querySelector('.rollback > .main-controls__range > input');
+const range = document.querySelector('.rollback > .main-controls__range > .range-value')
+const totalInput = document.getElementsByClassName('total-input');
+
+let screen = document.querySelectorAll('.screen');
+
+for (let i = 0; i < totalInput.length; i++) {
+  console.log(totalInput[i])
+}
+
 const isNumber = function(num){
 
   return !isNaN(parseFloat(num)) && isFinite(num) && num !== null;
@@ -154,21 +170,20 @@ const appData = {
 }
 
 
-appData.start()
+// appData.start()
 
+console.log(title[0]);
 
+console.log(button[0]);
+console.log(button[1]);
 
-// console.log(screens.split(", "));
-// console.log(getRollbackMessage(appData.fullPrice));
-// console.log(getServicePercentPrices());
-// console.log(typeof(title),
-//  typeof(screens),
-//  typeof(screenPrice),
-//  typeof(rollback),
-//  typeof(adaptive),
-//  typeof(service1),
-//  typeof(service2),
-//  typeof(allServicePrices),
-//  typeof(fullPrice),
-//  typeof(servicePercentPrice)
-// );
+console.log(plus);
+
+console.log(percent);
+console.log(number);
+
+console.log(input);
+
+console.log(range);
+
+console.log(screen)
