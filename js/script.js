@@ -110,6 +110,7 @@ const appData = {
     this.fullPrice = 0;
     this.servicePercentPrice = 0;
     this.totalCount = 0;
+    this.rollback = 0;
 
     startBtn.style.display = "flex";
     resetBtn.style.display = "none";
