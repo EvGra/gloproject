@@ -104,23 +104,25 @@ const appData = {
     totalCountRollback.value = 0;
     totalCount.value = 0;
 
+    this.screenPrice = 0;
+    this.ServicePricesPercent = 0; 
+    this.ServicePricesNumber = 0;
+    this.fullPrice = 0;
+    this.servicePercentPrice = 0;
+    this.totalCount = 0;
+
     startBtn.style.display = "flex";
     resetBtn.style.display = "none";
     buttonPlus.disabled = false;
    },
 
    clearScreens: function() {
+    const screenDel = document.querySelectorAll('.screen')
     const select = document.querySelectorAll('select')
     const input = document.querySelectorAll('.screen input[type=text]')
     const check = document.querySelectorAll('input[type=checkbox]')
 
-    select.forEach((item, i, arr) => {
-      for (i = 1; i < arr.length; i++){
-        arr[i].remove()
-      }
-    })
-
-    input.forEach((item, i, arr) => {
+    screenDel.forEach((item, i, arr) => {
       for (i = 1; i < arr.length; i++){
         arr[i].remove()
       }
